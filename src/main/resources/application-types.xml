@@ -1,4 +1,86 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
-  <types:catalog/>
+  <types:catalog>
+    <types:type name="move" format="json">
+      <types:shape format="weave" example="examples/move.json"><![CDATA[%dw 2.0
+
+type move = {|
+  game: {|
+    id: String, 
+    ruleset: {|
+      name: String, 
+      version: String, 
+      settings: {|
+        foodSpawnChance: Number {"typeId": "int"}, 
+        minimumFood: Number {"typeId": "int"}, 
+        hazardDamagePerTurn: Number {"typeId": "int"}, 
+        hazardMap: String, 
+        hazardMapAuthor: String, 
+        royale: {| shrinkEveryNTurns: Number {"typeId": "int"} |}, 
+        squad: {|
+          allowBodyCollisions: Boolean, 
+          sharedElimination: Boolean, 
+          sharedHealth: Boolean, 
+          sharedLength: Boolean
+        |}
+      |}
+    |}, 
+    map: String, 
+    timeout: Number {"typeId": "int"}, 
+    source: String
+  |}, 
+  turn: Number {"typeId": "int"}, 
+  board: {|
+    height: Number {"typeId": "int"}, 
+    width: Number {"typeId": "int"}, 
+    snakes: Array<{|      id: String,       name: String,       latency: String,       health: Number {"typeId": "int"},       body: Array<{|        x: Number {"typeId": "int"},         y: Number {"typeId": "int"}      |}>, 
+      head: {|
+        x: Number {"typeId": "int"}, 
+        y: Number {"typeId": "int"}
+      |}, 
+      length: Number {"typeId": "int"}, 
+      shout: String, 
+      squad: String, 
+      customizations: {|
+        color: String, 
+        head: String, 
+        tail: String
+      |}
+    |}>, 
+    food: Array<{|      x: Number {"typeId": "int"},       y: Number {"typeId": "int"}    |}>, 
+    hazards: Array<Any>
+  |}, 
+  you: {|
+    id: String, 
+    name: String, 
+    latency: String, 
+    health: Number {"typeId": "int"}, 
+    body: Array<{|      x: Number {"typeId": "int"},       y: Number {"typeId": "int"}    |}>, 
+    head: {|
+      x: Number {"typeId": "int"}, 
+      y: Number {"typeId": "int"}
+    |}, 
+    length: Number {"typeId": "int"}, 
+    shout: String, 
+    squad: String, 
+    customizations: {|
+      color: String, 
+      head: String, 
+      tail: String
+    |}
+  |}
+|} {"example": "{\\\"game\\\":{\\\"id\\\":\\\"33565836-e6ef-4ac2-8392-e61ffac99e6c\\\",\\\"ruleset\\\":{\\\"name\\\":\\\"standard\\\",\\\"version\\\":\\\"v1.2.1\\\",\\\"settings\\\":{\\\"foodSpawnChance\\\":15,\\\"minimumFood\\\":1,\\\"hazardDamagePerTurn\\\":0,\\\"hazardMap\\\":\\\"\\\",\\\"hazardMapAuthor\\\":\\\"\\\",\\\"royale\\\":{\\\"shrinkEveryNTurns\\\":0},\\\"squad\\\":{\\\"allowBodyCollisions\\\":false,\\\"sharedElimination\\\":false,\\\"sharedHealth\\\":false,\\\"sharedLength\\\":false}}},\\\"map\\\":\\\"standard\\\",\\\"timeout\\\":500,\\\"source\\\":\\\"custom\\\"},\\\"turn\\\":0,\\\"board\\\":{\\\"height\\\":11,\\\"width\\\":11,\\\"snakes\\\":[{\\\"id\\\":\\\"gs_JFk4h9kWtjxHPMK3S74vxHCW\\\",\\\"name\\\":\\\"Local\\\",\\\"latency\\\":\\\"\\\",\\\"health\\\":100,\\\"body\\\":[{\\\"x\\\":5,\\\"y\\\":1},{\\\"x\\\":5,\\\"y\\\":1},{\\\"x\\\":5,\\\"y\\\":1}],\\\"head\\\":{\\\"x\\\":5,\\\"y\\\":1},\\\"length\\\":3,\\\"shout\\\":\\\"\\\",\\\"squad\\\":\\\"\\\",\\\"customizations\\\":{\\\"color\\\":\\\"#888888\\\",\\\"head\\\":\\\"default\\\",\\\"tail\\\":\\\"default\\\"}}],\\\"food\\\":[{\\\"x\\\":4,\\\"y\\\":0},{\\\"x\\\":5,\\\"y\\\":5}],\\\"hazards\\\":[]},\\\"you\\\":{\\\"id\\\":\\\"gs_JFk4h9kWtjxHPMK3S74vxHCW\\\",\\\"name\\\":\\\"Local\\\",\\\"latency\\\":\\\"\\\",\\\"health\\\":100,\\\"body\\\":[{\\\"x\\\":5,\\\"y\\\":1},{\\\"x\\\":5,\\\"y\\\":1},{\\\"x\\\":5,\\\"y\\\":1}],\\\"head\\\":{\\\"x\\\":5,\\\"y\\\":1},\\\"length\\\":3,\\\"shout\\\":\\\"\\\",\\\"squad\\\":\\\"\\\",\\\"customizations\\\":{\\\"color\\\":\\\"#888888\\\",\\\"head\\\":\\\"default\\\",\\\"tail\\\":\\\"default\\\"}}}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#54a59f57-b3b2-49c9-9df1-ea5de079e976">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="move"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
 </types:mule>

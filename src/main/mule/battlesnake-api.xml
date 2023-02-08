@@ -126,6 +126,7 @@ output application/json
 				<ee:set-payload resource="dw/move-snake.dwl" />
 			</ee:message>
 		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="09848cdf-f52a-46de-ac0d-a07b06cbc583" message="#[payload]"/>
     </flow>
     <flow name="post:\end:application\json:battlesnake-api-config">
         <logger level="INFO" message="#['End Game $(payload.game.id)']" />
