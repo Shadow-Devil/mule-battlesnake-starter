@@ -4,7 +4,7 @@
 
 	<groupId>com.javastreets</groupId>
 	<artifactId>mule-battlesnake</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>mule-battlesnake</name>
@@ -48,6 +48,7 @@
 						<applyLatestRuntimePatch>true</applyLatestRuntimePatch>
 						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
+					<classifier>---- select project type ----</classifier>
 				</configuration>
 			</plugin>
 		</plugins>
